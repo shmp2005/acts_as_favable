@@ -1,12 +1,12 @@
 module ActsAsFavable
   module Favorite
-    
+
     def self.included(favorite_model)
       favorite_model.extend Finders
-      favorite_model.scope :in_order, favorite_model.order(created_at: :asc)
-      favorite_model.scope :recent, favorite_model.order(created_at: :desc)
+      scope :in_order, -> { order(created_at: :asc) }
+      scope :recent, -> { order(created_at: :desc) }
     end
-    
+
     module Finders
       def find_favorites_by_user(user)
         where(user_id: user.id).order(created_at: :desc)
