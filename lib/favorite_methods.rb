@@ -3,8 +3,8 @@ module ActsAsFavable
 
     def self.included(favorite_model)
       favorite_model.extend Finders
-      scope :in_order, -> { order(created_at: :asc) }
-      scope :recent, -> { order(created_at: :desc) }
+      favorite_model.scope :in_order, -> { order(created_at: :asc) }
+      favorite_model.scope :recent, -> { order(created_at: :desc) }
     end
 
     module Finders
