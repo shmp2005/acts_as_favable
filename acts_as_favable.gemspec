@@ -2,14 +2,14 @@
 
 Gem::Specification.new do |s|
   s.name = %q{acts_as_favable}
-  s.version = "1.0.1"
+  s.version = "1.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Andy Wang"]
+  s.authors = ["shmp2005"]
   s.autorequire = %q{acts_as_favable}
-  s.date = %q{2010-11-29}
-  s.description = %q{Plugin/Gem that provides favorites functionality}
-  s.email = %q{wangyaodi@gmail.com}
+  s.date = %q{2014-09-27}
+  s.description = %q{Plugin/Gem that provides favorites functionality, Rails>4.1.5}
+  s.email = %q{shmp2005@163.com}
   s.extra_rdoc_files = ["README.markdown", "MIT-LICENSE"]
   s.files = ["MIT-LICENSE", 
              "README.markdown", 

@@ -4,7 +4,7 @@ require 'rake/gempackagetask'
 PLUGIN = "acts_as_favable"
 GEM = "acts_as_favable"
 GEM_VERSION = "1.0.0"
-EMAIL = "wangyaodi@gmail.com"
+EMAIL = "shmp2005@163.com"
 SUMMARY = "Plugin/gem that provides favorite functionality"
 
 spec = Gem::Specification.new do |s|
@@ -15,7 +15,7 @@ spec = Gem::Specification.new do |s|
   s.extra_rdoc_files = ["README.markdown", "MIT-LICENSE"]
   s.summary = SUMMARY
   s.description = s.summary
-  s.author = 'Andy Wang'
+  s.author = 'Jianhua Tang'
   s.email = EMAIL
 
   # Uncomment this to add a dependency

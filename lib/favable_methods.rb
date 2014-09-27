@@ -23,7 +23,7 @@ module Acts #:nodoc:
       
       def find_favorites_by_user(user) 
         favable = ActiveRecord::Base.send(:class_name_of_active_record_descendant, self).to_s
-        Favorite.where(["user_id = ? and favable_type = ?", user.id, favable]).order("created_at DESC")
+        Favorite.where(user_id: user.id, favable_type: favable).order(created_at: :desc)
       end
     end
     
