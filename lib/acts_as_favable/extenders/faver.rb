@@ -11,6 +11,12 @@ module ActsAsFavable
         require 'acts_as_favable/faver'
         include ActsAsFavable::Faver
 
+        args.each do |fav|
+          define_method "fav_#{fav.name.pluralize.downcase}" do
+            favables_with(fav)
+          end
+        end
+
         class_eval do
           def self.faver?
             true
