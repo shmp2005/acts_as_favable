@@ -8,6 +8,10 @@ module ActsAsFavable
           def favables
             includes(:favable).map(&:favable)
           end
+
+          def favables_with klass
+            includes(:favable).where(favable_type: klass.name).map(&:favable)
+          end
         end
       end
     end

@@ -11,9 +11,6 @@ module ActsAsFavable
       end
     end
 
-    def default_conditions
-      {:favable_id => self.id, :favable_type => self.class.base_class.name.to_s}
-    end
 
     # faved
     def faved_by faver, args = {}
@@ -58,6 +55,10 @@ module ActsAsFavable
     end
 
     private
+    def default_conditions
+      {:favable_id => self.id, :favable_type => self.class.base_class.name.to_s}
+    end
+    
     def faver_opts faver
       {:faver_id => faver.id, :faver_type => faver.class.base_class.name}
     end
