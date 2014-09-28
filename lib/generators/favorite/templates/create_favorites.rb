@@ -10,6 +10,7 @@ class CreateFavorites < ActiveRecord::Migration
     add_index :favorites, :favable_type
     add_index :favorites, :favable_id
     add_index :favorites, :user_id
+    add_index :favorites, [:favable_type, :favable_id, :user_id], unique: true
   end
 
   def self.down
