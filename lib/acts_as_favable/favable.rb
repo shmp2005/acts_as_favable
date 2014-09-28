@@ -39,7 +39,7 @@ module ActsAsFavable
 
     def unfaved_by faver
       return false if faver.nil?
-      _favs_ = find_favs_for faver_option(faver)
+      _favs_ = find_favs_for faver_opts(faver)
 
       return true if _favs_.size == 0
       _favs_.each(&:destroy)
@@ -53,11 +53,11 @@ module ActsAsFavable
 
     # favers
     def faved_by? faver
-      favs = find_faves_for faver_option(faver)
+      favs = find_faves_for faver_opts(faver)
       favs.count > 0
     end
 
-    def faver_option faver
+    def faver_opts faver
       {:faver_id => faver.id, :faver_type => faver.class.base_class.name}
     end
 
