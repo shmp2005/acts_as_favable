@@ -1,1 +1,8 @@
-.svn
+pkg/*
+*.gem
+.bundle
+nbproject/*
+Gemfile.lock
+bin
+.idear
+.idear/*

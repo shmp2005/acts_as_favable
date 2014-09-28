@@ -1,6 +1,0 @@
-Description:
-    Copies favorite.rb to app/models/.
-    Copies create_favorites.rb to db/migrate
-
-Examples:
-    `rails generate favorite`
