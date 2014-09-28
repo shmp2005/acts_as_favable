@@ -13,7 +13,7 @@ module ActsAsFavable
 
         args.each do |fav|
           define_method "fav_#{fav.name.pluralize.downcase}" do
-            ActsAsFavable::Favorite.where(faver_id: self.id, faver_type: self.class.name, favable_type: fav.class.name)
+            self.favables_with(fav)
           end
         end
 
