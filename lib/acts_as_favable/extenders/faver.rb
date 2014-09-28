@@ -13,7 +13,8 @@ module ActsAsFavable
 
         args.each do |fav|
           define_method "fav_#{fav.name.pluralize.downcase}" do
-            self.favorites.favables_with(fav)
+            ids = self.favorites.favables_with(fav).collect(&:favable_id)
+            fav.where(id: ids)
           end
         end
 
