@@ -4,7 +4,7 @@ module ActsAsFavable
     def self.included(favorite_model)
       favorite_model.extend Finders
       favorite_model.scope :in_order, -> { favorite_model.order(created_at: :asc) }
-      favorite_model.scope :recent, -> { favorite_model.order(created_at: :desc) }
+      favorite_model.scope :recent, ->(limit_count=10) { favorite_model.limit(limit_count).order(created_at: :desc) }
     end
 
     module Finders
