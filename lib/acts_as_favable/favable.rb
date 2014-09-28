@@ -12,32 +12,22 @@ module ActsAsFavable
     end
 
     def default_conditions
-      {
-          :favable_id => self.id,
-          :favable_type => self.class.base_class.name.to_s
-      }
+      {:favable_id => self.id, :favable_type => self.class.base_class.name.to_s}
     end
 
     # faved
-    def fav_by args = {}
+    def faved_by faver, args = {}
 
       options = {}.merge(args)
-      if options[:faver].nil?
-        return false
-      end
+      return false if faver.nil?
 
       # find the favorite
-      _favs_ = find_favs_for({
-                                 :faver_id => options[:faver].id,
-                                 :note => options[:note],
-                                 :faver_type => options[:faver].class.base_class.name
-                             })
+      _favs_ = find_favs_for(faver_opts(faver))
 
       if _faves_.count == 0 or options[:duplicate]
         # this faver has never faved
         fav = ActsAsFavable::Favorite.new(
-            :favable => self,
-            :faver => options[:faver]
+            faver_opts(faver).merge(default_conditions).merge(note: options[:note])
         )
       else
         # this faver is potentially changing his fav
@@ -47,9 +37,9 @@ module ActsAsFavable
       fav.save
     end
 
-    def unfav args = {}
-      return false if args[:faver].nil?
-      _favs_ = find_favs_for(:faver_id => args[:faver].id, :faver_type => args[:faver].class.base_class.name)
+    def unfaved_by faver
+      return false if faver.nil?
+      _favs_ = find_favs_for faver_option(faver)
 
       return true if _favs_.size == 0
       _favs_.each(&:destroy)
@@ -62,9 +52,13 @@ module ActsAsFavable
     end
 
     # favers
-    def faved_on_by? faver
-      favs = find_faves_for :faver_id => faver.id, :faver_type => faver.class.base_class.name
+    def faved_by? faver
+      favs = find_faves_for faver_option(faver)
       favs.count > 0
+    end
+
+    def faver_option faver
+      {:faver_id => faver.id, :faver_type => faver.class.base_class.name}
     end
 
   end

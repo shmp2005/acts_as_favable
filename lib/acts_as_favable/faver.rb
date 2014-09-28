@@ -2,14 +2,6 @@ module ActsAsFavable
   module Faver
 
     def self.included(base)
-
-      # allow user to define these
-      aliases = {
-          :fav_for => [:likes],
-          :unfav_for => [:unlike],
-          :faved_on? => [:faved_for?]
-      }
-
       base.class_eval do
 
         has_many :favorites, :class_name => 'ActsAsFavable::Favorite', :as => :faver, :dependent => :destroy do
@@ -17,33 +9,22 @@ module ActsAsFavable
             includes(:favable).map(&:favable)
           end
         end
-
-        aliases.each do |method, links|
-          links.each do |new_method|
-            alias_method(new_method, method)
-          end
-        end
-
       end
-
     end
 
     # faving
-    def fav args
-      args[:favable].fav_by args.merge({:faver => self})
+    def fav favable, args={}
+      favable.faved_by self, args
     end
 
-    def fav_for model=nil, args={}
-      fav :favable => model, :note => args[:note]
-    end
-
-    def unfav_for model
-      model.unfav :faver => self
+    # unfaving
+    def unfav favable
+      favable.unfaved_by self
     end
 
     # results
-    def faved_on? favable
-      favs = find_votes(:favable_id => favable.id, :favable_type => favable.class.base_class.name)
+    def fav_on? favable
+      favs = find_favs(:favable_id => favable.id, :favable_type => favable.class.base_class.name)
       favs.size > 0
     end
 
@@ -66,7 +47,7 @@ module ActsAsFavable
     end
 
     def get_faved klass, extra_conditions = {}
-      klass.joins(:faves_for).merge find_faves(extra_conditions)
+      klass.joins(:favs_for).merge find_favs(extra_conditions)
     end
   end
 end
