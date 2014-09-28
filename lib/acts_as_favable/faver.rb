@@ -6,11 +6,11 @@ module ActsAsFavable
 
         has_many :favorites, :class_name => 'ActsAsFavable::Favorite', :as => :faver, :dependent => :destroy do
           def favables
-            includes(:favable).map(&:favable)
+            includes(:favable)
           end
 
           def favables_with klass
-            includes(:favable).where(favable_type: klass.name).map(&:favable)
+            favables.where(favable_type: klass.name)
           end
         end
       end
