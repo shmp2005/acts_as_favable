@@ -57,6 +57,7 @@ module ActsAsFavable
       favs.count > 0
     end
 
+    private
     def faver_opts faver
       {:faver_id => faver.id, :faver_type => faver.class.base_class.name}
     end
