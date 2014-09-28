@@ -4,5 +4,5 @@ pkg/*
 nbproject/*
 Gemfile.lock
 bin
-.idear
-.idear/*
+.idea
+.idea/*
