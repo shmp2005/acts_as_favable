@@ -24,7 +24,7 @@ module ActsAsFavable
       # find the favorite
       _favs_ = find_favs_for(faver_opts(faver))
 
-      if _faves_.count == 0 or options[:duplicate]
+      if _favs_.count == 0 or options[:duplicate]
         # this faver has never faved
         fav = ActsAsFavable::Favorite.new(
             faver_opts(faver).merge(default_conditions).merge(note: options[:note])
@@ -53,7 +53,7 @@ module ActsAsFavable
 
     # favers
     def faved_by? faver
-      favs = find_faves_for faver_opts(faver)
+      favs = find_favs_for faver_opts(faver)
       favs.count > 0
     end
 
