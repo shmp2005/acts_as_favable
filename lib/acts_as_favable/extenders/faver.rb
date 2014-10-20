@@ -15,7 +15,7 @@ module ActsAsFavable
 
           define_method "fav_#{fav.name.pluralize.downcase}" do
             ids = self.favorites.favables_with(fav).collect(&:favable_id)
-            fav.where(Hash[fav.primay_key, ids])
+            fav.where(Hash[fav.primary_key, ids])
           end
         end
 
