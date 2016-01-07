@@ -46,7 +46,7 @@ caching section of this document for more information.
 
 ### Votable Models
 
-```ruby
+```ruby 
 class Post < ActiveRecord::Base
   acts_as_votable
 end
