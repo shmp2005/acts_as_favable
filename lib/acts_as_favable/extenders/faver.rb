@@ -13,7 +13,7 @@ module ActsAsFavable
 
         args.each do |fav|
 
-          define_method "fav_#{fav.name.pluralize.downcase}" do
+          define_method "fav_#{fav.model_name.route_key}" do
             ids = self.favorites.favables_with(fav).collect(&:favable_id)
             fav.where(Hash[fav.primary_key, ids])
           end
