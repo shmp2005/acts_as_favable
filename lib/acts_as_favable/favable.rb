@@ -32,6 +32,12 @@ module ActsAsFavable
       end
 
       fav.save
+
+      if self.respond_to? :cached_favs
+        self.increment! :cached_favs, 1
+      end
+
+      fav
     end
 
     def unfaved_by faver
@@ -39,7 +45,12 @@ module ActsAsFavable
       _favs_ = find_favs_for faver_opts(faver)
 
       return true if _favs_.size == 0
-      _favs_.each(&:destroy)
+      _favs_.each do |ff|
+        ff.destory
+        if self.respond_to? :cached_favs
+          self.decrement! :cached_favs, 1
+        end
+      end
       true
     end
 
