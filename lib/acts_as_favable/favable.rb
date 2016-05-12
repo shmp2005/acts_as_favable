@@ -46,7 +46,7 @@ module ActsAsFavable
 
       return true if _favs_.size == 0
       _favs_.each do |ff|
-        ff.destory
+        ff.destroy
         if self.respond_to? :cached_favs
           self.decrement! :cached_favs, 1
         end
