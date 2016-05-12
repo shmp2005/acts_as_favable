@@ -26,6 +26,8 @@ module ActsAsFavable
         fav = ActsAsFavable::Favorite.new(
             faver_opts(faver).merge(default_conditions).merge(note: options[:note])
         )
+        puts "+++++++++++++++++++++"
+        puts fav
       else
         # this faver is potentially changing his fav
         fav = _favs_.last
